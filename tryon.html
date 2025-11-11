@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Try-On - StyleMeUp</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <div id="navbar-container">
+    <!-- Same navbar as index.html -->
+  </div>
+
+  <!-- Hero Section -->
+  <section class="tryon-hero section center">
+    <h1 class="section__title">VIRTUAL TRY-ON <span class="txt-gradient"></span></h1>
+    <p class="section__subtitle">Upload your photo and preview outfits instantly.</p>
+  </section>
+
+  <!-- Try-On Container -->
+  <section class="section tryon-container">
+    <div class="tryon-box">
+      <div class="tryon-preview">
+        <img src="assets/images/tryon/images.jpeg" alt="User Preview" id="userPreview">
+        <div class="overlay-outfit">
+          <img src="assets/images/tryon/preview.jpg" alt="Outfit Preview" id="outfitPreview">
+        </div>
+      </div>
+
+      <div class="tryon-controls">
+        <h3>Select Outfit</h3>
+        <div class="outfit-options">
+          <img src="assets/images/tryon/1st.jpg" alt="Outfit 1" onclick="changeOutfit('assets/images/tryon/outfit1.png')">
+          <img src="assets/images/tryon/2nd.jpg" alt="Outfit 2" onclick="changeOutfit('assets/images/tryon/outfit2.png')">
+          <img src="assets/images/tryon/3rd.jpg" alt="Outfit 3" onclick="changeOutfit('assets/images/tryon/outfit3.png')">
+        </div>
+
+        <h3>Upload Your Photo</h3>
+        <input type="file" accept="image/*" onchange="uploadUserPhoto(event)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container">
+    <!-- Footer here -->
+  </div>
+
+  <script src="scripts/main.js"></script>
+  <script src="scripts/tryon.js"></script>
+</body>
+</html>

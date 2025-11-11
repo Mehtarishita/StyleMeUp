@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reels — StyleMeUp</title>
+
+  <!-- page CSS -->
+  <link rel="stylesheet" href="styles/reels.css">
+
+  <!-- icons (Font Awesome) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar placeholder (same include pattern as your other pages) -->
+  <div id="navbar-container"></div>
+
+  <!-- HERO -->
+  <header class="reels-hero section">
+    <h1 class="section__title">FASHION <span class="txt-gradient">REELS</span></h1>
+    <p class="section__subtitle">Daily OOTD, quick styling tips and moodboard inspo — all in a swipe.</p>
+  </header>
+
+  <!-- OOTD (centered) -->
+  <section class="section">
+    <h2 class="small-title">OUTFIT OF THE DAY</h2>
+    <div class="ootd-card">
+      <img src="assets/images/reels/ootd.jpg" alt="SUMMER CHIC LOOK" class="ootd-img">
+      <div class="ootd-info">
+        <h3 class="ootd-title">SUMMER CHIC LOOK</h3>
+        <p class="ootd-desc">Floral top paired White Pants - Effortless & Comfy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="section">
+    <div class="filters-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ootd">OOTD</button>
+      <button class="filter-btn" data-filter="street">Streetwear</button>
+      <button class="filter-btn" data-filter="party">Party</button>
+      <button class="filter-btn" data-filter="ethnic">Ethnic</button>
+      <button class="filter-btn" data-filter="formal">Formal</button>
+    </div>
+  </section>
+
+  <!-- TRENDING REELS (horizontal scroll) -->
+  <section class="section">
+    <h2 class="section__title">TRENDING REELS</h2>
+
+    <div class="horizontal-scroll" id="reelsRow">
+      <!-- Each .reel-item uses data attributes. Replace data-video with your youtube/shorts url -->
+      <article class="reel-item" data-video="https://youtube.com/embeded/shorts/BNmQRm5m490?si=-aDZOX-HcmwD1fTa" data-category="ootd" data-title="Summer Outfit Inspo" data-creator="Rishita" data-duration="0:30" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://youtube.com/embeded/shorts/WN47Av-uXe4?si=ofJvxS5oVXySnNNT" data-category="ootd" data-title="Outfit Of The Day" data-creator="Astha" data-duration="1:00" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://youtube.com/embeded/shorts/g6ycVPN1GfE?si=GqJiOW9I86vVqvoZ" data-category="street" data-title="Thrift Flip Challenge" data-creator="Mehak" data-duration="2:45" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://youtube.com/embeded/shorts/l4ROJuk9O6s?si=I0OdPkge6jymB3--" data-category="party" data-title="Party Look Transform" data-creator="Neha" data-duration="1:12" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/shorts/BNmQRm5m490" data-category="street" data-title="90s Remix Outfit" data-creator="Maya" data-duration="0:40" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/watch?v=ScMzIvxBSi4" data-category="ootd" data-title="Casual Brunch Fit" data-creator="Aditi" data-duration="0:55" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/shorts/someVideoID1" data-category="ethnic" data-title="Festive Drapes" data-creator="Ishita" data-duration="1:10" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/watch?v=Ke90Tje7VS0" data-category="formal" data-title="Office Chic" data-creator="Sana" data-duration="1:45" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/shorts/someVideoID2" data-category="party" data-title="Night Out Styling" data-creator="Priya" data-duration="0:50" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/watch?v=abcdEFGhijk" data-category="street" data-title="Denim Remixed" data-creator="Rhea" data-duration="1:05" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/shorts/someVideoID3" data-category="ootd" data-title="Layered Fall Look" data-creator="Mira" data-duration="0:45" tabindex="0"></article>
+
+      <article class="reel-item" data-video="https://www.youtube.com/watch?v=l8A6wXKkF4Y" data-category="ethnic" data-title="Modern Ethnic Fusion" data-creator="Neelam" data-duration="1:32" tabindex="0"></article>
+    </div>
+  </section>
+
+  <!-- MOODBOARD HORIZONTAL -->
+  <section class="section">
+    <h2 class="section__title"> MOODBOARD INSPIRATION</h2>
+    <div class="horizontal-scroll" id="moodRow">
+      <div class="mood-card">
+        <img src="assets/images/reels/minimal.jpg" alt="Minimal Aesthetic">
+        <h4>Minimal Aesthetic</h4>
+      </div>
+      <div class="mood-card">
+        <img src="assets/images/reels/boldwear.png" alt="Bold Streetwear">
+        <h4>Bold Streetwear</h4>
+      </div>
+      <div class="mood-card">
+        <img src="assets/images/reels/pastel.png" alt="Pastel Party">
+        <h4>Pastel Party Vibes</h4>
+      </div>
+      <div class="mood-card">
+        <img src="assets/images/reels/ethnic.png" alt="Festive Ethnic">
+        <h4>Festive Ethnic</h4>
+      </div>
+      <div class="mood-card">
+        <img src="assets/images/reels/retro.jpg" alt="Retro Glam">
+        <h4>Retro Glam</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for playing video -->
+  <div id="reelModal" class="reel-modal" aria-hidden="true">
+    <div class="reel-modal__backdrop" id="reelModalBackdrop"></div>
+    <div class="reel-modal__content" role="dialog" aria-modal="true">
+      <button class="reel-modal__close" id="reelModalClose" aria-label="Close">✕</button>
+      <div class="reel-modal__player">
+        <iframe id="reelIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="reel-modal__meta">
+        <h3 id="reelModalTitle"></h3>
+        <p id="reelModalCreator"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer container -->
+  <div id="footer-container"></div>
+
+  <!-- scripts -->
+  <script src="scripts/reels.js"></script>
+</body>
+</html>
