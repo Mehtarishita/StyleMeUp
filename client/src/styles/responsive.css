@@ -1,0 +1,22 @@
+/* Tablets */
+@media (max-width: 992px){
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .reels-grid{grid-template-columns:repeat(2,1fr)}
+  .tryon__wrap{grid-template-columns:1fr}
+  .founder__wrap{grid-template-columns:1fr}
+  .footer__grid{grid-template-columns:1.5fr 1fr 1fr}
+}
+
+/* Mobiles */
+@media (max-width: 640px){
+  .hero__container{grid-template-columns:1fr}
+  .hero__title{font-size:36px}
+  .section{padding:56px 16px}
+  .features-grid,.reels-grid{grid-template-columns:1fr}
+  .pricing__grid{grid-template-columns:1fr}
+  .founder__features{grid-template-columns:1fr}
+  .nav__links{display:none;position:absolute;top:62px;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:10px 16px;flex-direction:column}
+  .nav__toggle{display:block}
+  .nav.open .nav__links{display:flex}
+  .nav__actions{display:none}
+}
