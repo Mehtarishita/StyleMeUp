@@ -6,10 +6,14 @@ import { useAuth } from '../context/AuthContext';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, addToCart, toggleWishlist, trackRecentlyViewed } = useAuth();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Selection state
+  const [selectedSize, setSelectedSize] = useState('');
+  const [qty, setQty] = useState(1);
   
   // Review form state
   const [rating, setRating] = useState(5);
@@ -29,6 +33,14 @@ const ProductDetail = () => {
       ]);
       setProduct(productRes.data.data);
       setReviews(reviewsRes.data.data);
+      
+      // Auto select first size
+      if (productRes.data.data.sizes?.length > 0) {
+        setSelectedSize(productRes.data.data.sizes[0]);
+      }
+
+      // Track recently viewed
+      trackRecentlyViewed(id);
     } catch (error) {
       toast.error('Failed to load product details');
     } finally {
@@ -110,7 +122,11 @@ const ProductDetail = () => {
             <strong>Available Sizes:</strong>
             <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
               {product.sizes.map(size => (
-                <div key={size} style={{ padding: '8px 16px', border: '1px solid var(--border)', borderRadius: '4px' }}>
+                <div 
+                  key={size} 
+                  onClick={() => setSelectedSize(size)}
+                  style={{ padding: '8px 16px', border: `1px solid ${selectedSize === size ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '4px', cursor: 'pointer', background: selectedSize === size ? 'var(--bg)' : 'transparent' }}
+                >
                   {size}
                 </div>
               ))}
@@ -118,17 +134,22 @@ const ProductDetail = () => {
           </div>
 
           <div style={{ marginBottom: '30px' }}>
-            <strong>Colors:</strong>
-            <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-              {product.colors.map(color => (
-                <div key={color} style={{ padding: '8px 16px', border: '1px solid var(--border)', borderRadius: '4px', background: 'var(--bg)' }}>
-                  {color}
-                </div>
-              ))}
+            <strong>Quantity:</strong>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
+              <button onClick={() => setQty(Math.max(1, qty - 1))} style={{ padding: '5px 15px', border: '1px solid var(--border)', background: 'var(--bg)' }}>-</button>
+              <span>{qty}</span>
+              <button onClick={() => setQty(qty + 1)} style={{ padding: '5px 15px', border: '1px solid var(--border)', background: 'var(--bg)' }}>+</button>
             </div>
           </div>
 
-          <button className="btn btn--primary wide" disabled>Add to Cart (Coming Soon)</button>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button onClick={() => addToCart(product._id, qty, selectedSize)} className="btn btn--primary wide" disabled={product.stock === 0} style={{ flex: 1 }}>
+              {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+            </button>
+            <button onClick={() => toggleWishlist(product._id)} className="btn btn--outline" style={{ padding: '0 20px' }}>
+              {user?.wishlist?.some(w => w._id === product._id || w === product._id) ? '♥ Saved' : '♡ Save'}
+            </button>
+          </div>
           <p style={{ marginTop: '10px', color: product.stock > 0 ? 'green' : 'red' }}>
             {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
           </p>

@@ -13,6 +13,11 @@ import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
 import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import Wishlist from './pages/Wishlist';
+import Checkout from './pages/Checkout';
+import OrderHistory from './pages/OrderHistory';
+import OrderDetail from './pages/OrderDetail';
 
 function App() {
   return (
@@ -34,6 +39,11 @@ function App() {
           <Route path="/forgot-password.html" element={<ForgotPassword />} />
           
           {/* Protected Routes */}
+          <Route path="/cart.html" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path="/wishlist.html" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+          <Route path="/checkout.html" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+          <Route path="/orders.html" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
+          <Route path="/orders/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
           <Route path="/profile.html" element={
             <ProtectedRoute>
               <Profile />

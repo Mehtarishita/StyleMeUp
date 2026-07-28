@@ -39,12 +39,30 @@ const Navbar = () => {
         <div className="nav__actions">
           {user ? (
             <>
-              <Link className="link" to="/profile.html" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'var(--primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
-                <span>Profile</span>
-              </Link>
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                <Link to="/wishlist.html" style={{ position: 'relative', fontSize: '20px', textDecoration: 'none', color: 'var(--text)' }}>
+                  ♥
+                  {user.wishlist?.length > 0 && (
+                    <span style={{ position: 'absolute', top: '-8px', right: '-8px', background: 'var(--primary)', color: 'white', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px' }}>
+                      {user.wishlist.length}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/cart.html" style={{ position: 'relative', fontSize: '20px', textDecoration: 'none', color: 'var(--text)' }}>
+                  🛒
+                  {user.cart?.length > 0 && (
+                    <span style={{ position: 'absolute', top: '-8px', right: '-8px', background: 'var(--primary)', color: 'white', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px' }}>
+                      {user.cart.reduce((acc, item) => acc + item.qty, 0)}
+                    </span>
+                  )}
+                </Link>
+                <Link className="link" to="/profile.html" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '10px' }}>
+                  <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'var(--primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span>Profile</span>
+                </Link>
+              </div>
               <button onClick={handleLogout} className="btn btn--sm btn--outline" style={{ cursor: 'pointer' }}>Logout</button>
             </>
           ) : (

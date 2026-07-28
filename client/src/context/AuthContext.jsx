@@ -85,12 +85,57 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const toggleWishlist = async (productId) => {
+    if (!user) return toast.error('Please login first');
+    try {
+      const res = await axios.post(`http://localhost:5000/api/users/wishlist/${productId}`);
+      setUser(prev => ({ ...prev, wishlist: res.data.data }));
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error('Failed to update wishlist');
+    }
+  };
+
+  const addToCart = async (productId, qty = 1, size = 'M') => {
+    if (!user) return toast.error('Please login first');
+    try {
+      const res = await axios.post(`http://localhost:5000/api/users/cart`, { productId, qty, size });
+      setUser(prev => ({ ...prev, cart: res.data.data }));
+      toast.success('Cart updated');
+    } catch (error) {
+      toast.error('Failed to add to cart');
+    }
+  };
+
+  const removeFromCart = async (itemId) => {
+    try {
+      const res = await axios.delete(`http://localhost:5000/api/users/cart/${itemId}`);
+      setUser(prev => ({ ...prev, cart: res.data.data }));
+    } catch (error) {
+      toast.error('Failed to remove from cart');
+    }
+  };
+
+  const trackRecentlyViewed = async (productId) => {
+    if (!user) return;
+    try {
+      await axios.post(`http://localhost:5000/api/users/recently-viewed/${productId}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const value = {
     user,
     loading,
     login,
     signup,
     logout,
+    toggleWishlist,
+    addToCart,
+    removeFromCart,
+    trackRecentlyViewed,
+    setUser // export setUser to manually refresh it after checkout
   };
 
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;

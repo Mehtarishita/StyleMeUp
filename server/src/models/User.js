@@ -30,6 +30,29 @@ const userSchema = new mongoose.Schema(
       styles: [String],
       budgetRange: String,
     },
+    wishlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      }
+    ],
+    recentlyViewed: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      }
+    ],
+    cart: [
+      {
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Product',
+          required: true,
+        },
+        qty: { type: Number, required: true, default: 1 },
+        size: { type: String },
+      }
+    ],
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

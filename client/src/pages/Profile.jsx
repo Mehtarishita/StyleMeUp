@@ -34,6 +34,34 @@ const Profile = () => {
           <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '20px 0' }} />
           
           <div>
+            <h3 style={{ marginBottom: '15px' }}>Shopping</h3>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <button onClick={() => navigate('/orders.html')} className="btn btn--outline">My Orders</button>
+              <button onClick={() => navigate('/wishlist.html')} className="btn btn--outline">Wishlist</button>
+            </div>
+          </div>
+
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '20px 0' }} />
+
+          <div>
+            <h3 style={{ marginBottom: '15px' }}>Recently Viewed</h3>
+            {user?.recentlyViewed?.length > 0 ? (
+              <div style={{ display: 'flex', gap: '15px', overflowX: 'auto', paddingBottom: '10px' }}>
+                {user.recentlyViewed.map(product => (
+                  <div key={product._id} style={{ flexShrink: 0, width: '120px' }}>
+                    <img onClick={() => navigate(`/product/${product._id}`)} src={product.images?.[0] || 'https://via.placeholder.com/400x500'} alt={product.name} style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer' }} />
+                    <p style={{ fontSize: '12px', margin: '5px 0 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.name}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: 'var(--muted)' }}>You haven't viewed any products yet.</p>
+            )}
+          </div>
+
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '20px 0' }} />
+          
+          <div>
             <h3 style={{ marginBottom: '15px' }}>Account Actions</h3>
             <button onClick={handleLogout} className="btn btn--outline" style={{ color: '#d32f2f', borderColor: '#d32f2f' }}>
               Logout

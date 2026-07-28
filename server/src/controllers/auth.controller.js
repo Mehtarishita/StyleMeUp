@@ -86,7 +86,10 @@ export const logout = (req, res) => {
 
 export const getMe = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select('-passwordHash');
+    const user = await User.findById(req.user.id)
+      .select('-passwordHash')
+      .populate('wishlist')
+      .populate('cart.product');
     res.status(200).json({ success: true, data: user, message: 'User profile retrieved' });
   } catch (error) {
     next(error);
