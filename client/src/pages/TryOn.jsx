@@ -28,10 +28,10 @@ const TryOn = () => {
       <div className="tryon-container">
         <div className="tryon-box">
           <div className="upload-section">
-            <h2>Upload Photo</h2>
-            <p>For best results, upload a full-body photo with good lighting.</p>
+            <h2>Upload Your Photo</h2>
+            <p>To get the most accurate virtual try-on experience, please upload a clear, well-lit photo of yourself.</p>
             <input type="file" accept="image/*" onChange={uploadUserPhoto} />
-            <button>Try On Magic ✨</button>
+            <button>Virtual Try-On ✨</button>
           </div>
 
           <div className="tryon-preview">
