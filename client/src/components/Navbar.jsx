@@ -29,6 +29,7 @@ const Navbar = () => {
         <ul className="nav__links" style={{ display: isOpen ? 'flex' : '' }}>
           <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
           <li><Link to="/explore.html" onClick={() => setIsOpen(false)}>Explore</Link></li>
+          <li><Link to="/generator.html" onClick={() => setIsOpen(false)}>AI Stylist</Link></li>
           <li><Link to="/tryon.html" onClick={() => setIsOpen(false)}>Try-On</Link></li>
           <li><Link to="/reels.html" onClick={() => setIsOpen(false)}>Reels</Link></li>
           <li><Link to="/about.html" onClick={() => setIsOpen(false)}>About</Link></li>

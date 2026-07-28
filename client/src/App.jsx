@@ -18,6 +18,7 @@ import Wishlist from './pages/Wishlist';
 import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
+import OutfitGenerator from './pages/OutfitGenerator';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/explore.html" element={<Explore />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/generator.html" element={<OutfitGenerator />} />
           <Route path="/tryon.html" element={<TryOn />} />
           <Route path="/reels.html" element={<Reels />} />
           <Route path="/creators.html" element={<Creators />} />
