@@ -1,12 +1,9 @@
 import express from 'express';
-import { getOutfitRecommendation } from '../controllers/ai.controller.js';
+import { getOutfitRecommendation, postChatMessage } from '../controllers/ai.controller.js';
 import { protect } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-// Public route (optional to protect, but let's allow guests if auth middleware isn't strict, or we can mock req.user)
-// Wait, protect middleware throws 401 if no token. We will create a custom middleware or just make it public.
-// Let's make it public so anyone can try it out! We'll extract user if token exists.
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
@@ -24,5 +21,6 @@ const optionalAuth = async (req, res, next) => {
 };
 
 router.post('/outfit-recommendation', optionalAuth, getOutfitRecommendation);
+router.post('/stylist-chat', optionalAuth, postChatMessage);
 
 export default router;

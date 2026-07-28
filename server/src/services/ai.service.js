@@ -44,3 +44,50 @@ export const generateOutfitRecommendation = async (preferences) => {
     throw new Error('Failed to generate outfit recommendation. Please try again.');
   }
 };
+
+export const generateChatResponse = async (history, newMessage) => {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY is not configured in environment variables');
+  }
+
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+  // Convert history array to a format Gemini understands
+  const chatHistory = history.map(msg => ({
+    role: msg.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: msg.content }]
+  }));
+
+  const chat = model.startChat({
+    history: chatHistory,
+    systemInstruction: {
+      parts: [{
+        text: `You are an expert fashion stylist assistant. You help users find outfits.
+Respond to the user naturally and helpfully.
+If the user's message implies they need a specific outfit or item recommendation (e.g. "I have a wedding", "I need a red dress"), you MUST include a "searchQueries" array in your JSON response with specific clothing descriptions so we can search our catalog for them.
+Otherwise, if they are just chatting or saying hi, leave "searchQueries" empty.
+
+You MUST return ONLY a raw JSON object (no markdown formatting, no backticks, no comments) with the following exact structure:
+{
+  "reply": "Your natural language response to the user",
+  "searchQueries": [
+    {
+      "keyword": "string describing the specific item (e.g., 'elegant red dress' or 'black leather boots')",
+      "gender": "string ('Women', 'Men', or 'Unisex')"
+    }
+  ]
+}`
+      }]
+    }
+  });
+
+  try {
+    const result = await chat.sendMessage([{ text: newMessage }]);
+    const text = result.response.text();
+    const cleanedText = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+    return JSON.parse(cleanedText);
+  } catch (error) {
+    console.error('AI Chat Error:', error);
+    throw new Error('Failed to communicate with AI Stylist.');
+  }
+};

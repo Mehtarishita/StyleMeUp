@@ -19,6 +19,7 @@ import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
 import OutfitGenerator from './pages/OutfitGenerator';
+import StylistChat from './pages/StylistChat';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/explore.html" element={<Explore />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/generator.html" element={<OutfitGenerator />} />
+          <Route path="/stylist-chat.html" element={<StylistChat />} />
           <Route path="/tryon.html" element={<TryOn />} />
           <Route path="/reels.html" element={<Reels />} />
           <Route path="/creators.html" element={<Creators />} />
