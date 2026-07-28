@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore.html" element={<Explore />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/tryon.html" element={<TryOn />} />
           <Route path="/reels.html" element={<Reels />} />
           <Route path="/creators.html" element={<Creators />} />
