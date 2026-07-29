@@ -113,12 +113,12 @@ h1,h2,h3,h4{color:var(--heading);margin:0 0 .5rem 0}
 .nav{position:sticky;top:0;z-index:50;background:#fff}
 .nav__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
 .brand{font-weight:700;color:var(--primary)}
-.nav__links{display:flex;gap:20px;list-style:none;margin:0;padding:0}
-.nav__links a{color:#6b4a54;font-weight:500}
+.nav__links{display:flex;gap:16px;list-style:none;margin:0;padding:0;align-items:center}
+.nav__links a{color:#6b4a54;font-weight:500;white-space:nowrap}
 .nav__links a:hover{color:var(--primary)}
-.nav__actions{display:flex;gap:14px;align-items:center}
+.nav__actions{display:flex;gap:14px;align-items:center;white-space:nowrap}
 
-.link{color:var(--primary);font-weight:600}
+.link{color:var(--primary);font-weight:600;white-space:nowrap}
 .nav__toggle{display:none;background:none;border:0;padding:6px 2px}
 .nav__toggle span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:1px}
 

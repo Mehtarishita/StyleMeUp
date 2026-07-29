@@ -4,6 +4,8 @@ import connectDB from './config/db.js';
 import Product from './models/Product.js';
 import Category from './models/Category.js';
 import Review from './models/Review.js';
+import User from './models/User.js';
+import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
@@ -123,6 +125,17 @@ export const seedDatabase = async () => {
     }
 
     await Product.insertMany(productsToInsert);
+
+    console.log('Generating Admin User...');
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash('admin123', salt);
+    await User.create({
+      name: 'Admin User',
+      email: 'admin@stylemeup.com',
+      passwordHash,
+      role: 'admin'
+    });
+
     console.log('Data Imported Successfully!');
   } catch (error) {
     console.error(`Error with seeder: ${error}`);
