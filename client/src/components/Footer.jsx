@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Linkedin } from 'lucide-react';
+import { InstagramIcon, YoutubeIcon, LinkedinIcon } from './Icons';
 
 const Footer = () => {
   return (
@@ -10,9 +10,9 @@ const Footer = () => {
           <h4>StyleMeUp</h4>
           <p>AI-powered fashion that helps you discover, try, and own your personal style.</p>
           <div className="socials" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <a href="#" aria-label="Instagram"><Instagram size={24} color="#fff" /></a>
-            <a href="#" aria-label="YouTube"><Youtube size={24} color="#fff" /></a>
-            <a href="#" aria-label="LinkedIn"><Linkedin size={24} color="#fff" /></a>
+            <a href="#" aria-label="Instagram"><InstagramIcon size={24} color="#fff" /></a>
+            <a href="#" aria-label="YouTube"><YoutubeIcon size={24} color="#fff" /></a>
+            <a href="#" aria-label="LinkedIn"><LinkedinIcon size={24} color="#fff" /></a>
           </div>
         </div>
 

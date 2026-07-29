@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Instagram, Youtube, Linkedin, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { InstagramIcon, YoutubeIcon, LinkedinIcon } from '../components/Icons';
 import { motion } from 'framer-motion';
 import { variants } from '../styles/motion';
 
@@ -66,13 +67,13 @@ const Contact = () => {
               <p style={{ margin: '0 0 15px', fontWeight: 'bold', fontSize: '18px' }}>Follow Us</p>
               <div style={{ display: 'flex', gap: '15px' }}>
                 <motion.a whileHover={{ scale: 1.1, y: -3 }} href="#" aria-label="Instagram" style={{ background: 'rgba(255,255,255,0.2)', padding: '10px', borderRadius: '50%', display: 'flex', color: 'white' }}>
-                  <Instagram size={20} />
+                  <InstagramIcon size={20} />
                 </motion.a>
                 <motion.a whileHover={{ scale: 1.1, y: -3 }} href="#" aria-label="YouTube" style={{ background: 'rgba(255,255,255,0.2)', padding: '10px', borderRadius: '50%', display: 'flex', color: 'white' }}>
-                  <Youtube size={20} />
+                  <YoutubeIcon size={20} />
                 </motion.a>
                 <motion.a whileHover={{ scale: 1.1, y: -3 }} href="#" aria-label="LinkedIn" style={{ background: 'rgba(255,255,255,0.2)', padding: '10px', borderRadius: '50%', display: 'flex', color: 'white' }}>
-                  <Linkedin size={20} />
+                  <LinkedinIcon size={20} />
                 </motion.a>
               </div>
             </div>
