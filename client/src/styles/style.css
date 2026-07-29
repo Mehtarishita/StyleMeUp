@@ -142,13 +142,13 @@ h1,h2,h3,h4{color:var(--heading);margin:0 0 .5rem 0}
 
 .nav{position:sticky;top:0;z-index:50;background:var(--nav-bg)}
 .nav__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-.brand{font-weight:700;color:var(--primary)}
-.nav__links{display:flex;gap:10px;list-style:none;margin:0;padding:0;align-items:center}
-.nav__links a{color:var(--text);font-weight:500;white-space:nowrap;font-size:13px}
+.brand{font-weight:700;color:var(--primary);font-size:20px}
+.nav__links{display:flex;gap:24px;list-style:none;margin:0;padding:0;align-items:center}
+.nav__links a{color:var(--text);font-weight:500;white-space:nowrap;font-size:15px;transition:color 0.2s}
 .nav__links a:hover{color:var(--primary)}
-.nav__actions{display:flex;gap:12px;align-items:center;white-space:nowrap;font-size:13px}
+.nav__actions{display:flex;gap:16px;align-items:center;white-space:nowrap;font-size:15px}
 
-.link{color:var(--primary);font-weight:600;white-space:nowrap;font-size:13px}
+.link{color:var(--primary);font-weight:600;white-space:nowrap;font-size:15px}
 .nav__toggle{display:none;background:none;border:0;padding:6px 2px}
 .nav__toggle span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:1px}
 
