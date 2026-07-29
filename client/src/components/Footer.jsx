@@ -7,7 +7,10 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer__grid">
         <div>
-          <h4>StyleMeUp</h4>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+            <img src="/assets/logo.png" alt="StyleMeUp Logo" style={{ height: '32px', width: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+            <h4 style={{ margin: 0 }}>StyleMeUp</h4>
+          </div>
           <p>AI-powered fashion that helps you discover, try, and own your personal style.</p>
           <div className="socials" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <a href="#" aria-label="Instagram"><InstagramIcon size={24} color="#fff" /></a>

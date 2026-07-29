@@ -19,8 +19,10 @@ const Navbar = () => {
     <nav className="nav">
       <div className="nav__inner">
         <nav className="navbar" style={{ padding: 0, boxShadow: 'none' }}>
-          <div className="nav-left">
-            <img src="/assets/images/logo.jpg" alt="StyleMeUp Logo" className="logo" />
+          <div className="nav-left" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img src="/assets/logo.png" alt="StyleMeUp Logo" className="logo" style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover' }} />
+            </Link>
             <Link className="brand" to="/">StyleMeUp</Link>
           </div>
         </nav>
