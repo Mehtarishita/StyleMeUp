@@ -7,6 +7,7 @@ import Skeleton from '../components/Skeleton';
 import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { variants } from '../styles/motion';
+import { mockProducts } from '../data/mockData';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -42,8 +43,17 @@ const ProductDetail = () => {
       // Track recently viewed
       trackRecentlyViewed(id);
     } catch (error) {
-      console.error(error);
-      toast.error('Failed to load product details');
+      console.warn('Backend failed, using mock product data.');
+      const mockProduct = mockProducts.find(p => p._id === id);
+      if (mockProduct) {
+        setProduct(mockProduct);
+        setReviews([]);
+        if (mockProduct.sizes?.length > 0) setSelectedSize(mockProduct.sizes[0]);
+        trackRecentlyViewed(id);
+      } else {
+        console.error(error);
+        toast.error('Failed to load product details');
+      }
     } finally {
       setLoading(false);
     }
