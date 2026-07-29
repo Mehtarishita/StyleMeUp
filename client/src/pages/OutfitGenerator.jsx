@@ -3,6 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { variants } from '../styles/motion';
 
 const OutfitGenerator = () => {
   const [formData, setFormData] = useState({
@@ -175,24 +177,24 @@ const OutfitGenerator = () => {
                 "{result.outfit.explanation}"
               </p>
 
-              <div style={{ display: 'grid', gap: '20px' }}>
+              <motion.div style={{ display: 'grid', gap: '20px' }} variants={variants.stagger} initial="initial" animate="animate">
                 {['top', 'bottom', 'shoes', 'accessories'].map(key => {
                   const desc = result.outfit[key];
                   if (!desc) return null;
                   return (
-                    <div key={key} style={{ background: 'var(--bg)', padding: '15px', borderRadius: '8px' }}>
+                    <motion.div key={key} style={{ background: 'var(--bg)', padding: '15px', borderRadius: '8px' }} variants={variants.itemFade}>
                       <strong style={{ textTransform: 'capitalize', color: 'var(--primary)' }}>{key}</strong>
                       <p style={{ margin: '5px 0' }}>{desc}</p>
-                    </div>
+                    </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
 
               <h3 style={{ marginTop: '40px', marginBottom: '20px' }}>Shop The Look</h3>
-              <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px' }}>
+              <motion.div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px' }} variants={variants.stagger} initial="initial" animate="animate">
                 {result.matchedProducts.length > 0 ? (
                   result.matchedProducts.map(product => (
-                    <div key={product._id} className="product-card" style={{ border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden' }}>
+                    <motion.div key={product._id} className="product-card" style={{ border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden' }} variants={variants.itemFade} whileHover="hover" whileTap="tap">
                       <Link to={`/product/${product._id}`}>
                         <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
                       </Link>
@@ -202,12 +204,12 @@ const OutfitGenerator = () => {
                         </Link>
                         <div style={{ fontWeight: 'bold', fontSize: '14px' }}>₹{product.price}</div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))
                 ) : (
                   <p>No exact catalog matches found. Try adjusting your preferences!</p>
                 )}
-              </div>
+              </motion.div>
             </div>
           )}
         </div>

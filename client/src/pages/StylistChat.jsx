@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const StylistChat = () => {
   const [messages, setMessages] = useState([{ role: 'assistant', content: 'Hi! I am your AI Fashion Stylist. What can I help you find today?', recommendedProducts: [] }]);
@@ -68,10 +69,17 @@ const StylistChat = () => {
 
       {/* Messages Area */}
       <div style={{ flex: 1, padding: '20px', overflowY: 'auto', background: '#fafafa', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        {messages.map((msg, idx) => (
-          <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
-            
-            {/* Bubble */}
+        <AnimatePresence>
+          {messages.map((msg, idx) => (
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
+            >
+              
+              {/* Bubble */}
             <div style={{
               maxWidth: '75%',
               padding: '12px 18px',
@@ -103,17 +111,27 @@ const StylistChat = () => {
                 ))}
               </div>
             )}
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
         {loading && (
-          <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ display: 'flex', alignItems: 'flex-start' }}
+          >
             <div style={{ padding: '12px 18px', borderRadius: '16px', borderBottomLeftRadius: '4px', background: '#fff', border: '1px solid var(--border)', display: 'flex', gap: '5px' }}>
-              <span style={{ animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.32s' }}>.</span>
-              <span style={{ animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.16s' }}>.</span>
-              <span style={{ animation: 'bounce 1.4s infinite ease-in-out both' }}>.</span>
+              {[0, 1, 2].map((dot) => (
+                <motion.span 
+                  key={dot}
+                  animate={{ y: [0, -5, 0], opacity: [0.5, 1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1, delay: dot * 0.2 }}
+                  style={{ display: 'inline-block', width: '6px', height: '6px', background: 'var(--text)', borderRadius: '50%' }}
+                />
+              ))}
             </div>
-          </div>
+          </motion.div>
         )}
         <div ref={messagesEndRef} />
       </div>
