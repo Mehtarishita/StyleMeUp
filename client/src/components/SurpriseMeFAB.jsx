@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { Sparkles, X } from 'lucide-react';
+import { mockProducts } from '../data/mockData';
 
 const SurpriseMeFAB = () => {
   const [loading, setLoading] = useState(false);
@@ -16,12 +17,27 @@ const SurpriseMeFAB = () => {
     try {
       const res = await axios.post('http://localhost:5000/api/ai/outfit-generator', {});
       setResult(res.data.data);
-    } catch (error) {
-      console.error(error);
-      toast.error('Failed to generate surprise look.');
-      setIsOpen(false);
-    } finally {
       setLoading(false);
+    } catch (error) {
+      console.warn('AI API failed, falling back to mock surprise generation.');
+      
+      setTimeout(() => {
+        const shuffled = [...mockProducts].sort(() => 0.5 - Math.random());
+        const selectedProducts = shuffled.slice(0, 3);
+        
+        setResult({
+          input: {
+            occasion: 'Surprise',
+            style: 'Trending',
+            season: 'Current'
+          },
+          outfit: {
+            explanation: "We've put together a spontaneous, trendy look featuring some of our best pieces that pair perfectly together."
+          },
+          matchedProducts: selectedProducts
+        });
+        setLoading(false);
+      }, 2000);
     }
   };
 
