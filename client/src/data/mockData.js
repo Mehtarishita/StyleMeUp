@@ -15,6 +15,8 @@ export const mockProducts = [
     rating: 4.8,
     category: 'c1',
     gender: 'Unisex',
+    sizes: ['S', 'M', 'L', 'XL'],
+    stock: 12,
     images: ['https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -25,7 +27,9 @@ export const mockProducts = [
     rating: 4.6,
     category: 'c2',
     gender: 'Men',
-    images: ['https://images.unsplash.com/photo-1542272604-780c8d52f5ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+    sizes: ['30', '32', '34', '36'],
+    stock: 45,
+    images: ['https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
     _id: 'p3',
@@ -35,6 +39,8 @@ export const mockProducts = [
     rating: 4.9,
     category: 'c2',
     gender: 'Women',
+    sizes: ['XS', 'S', 'M', 'L'],
+    stock: 8,
     images: ['https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -45,6 +51,8 @@ export const mockProducts = [
     rating: 4.5,
     category: 'c3',
     gender: 'Women',
+    sizes: ['S', 'M', 'L'],
+    stock: 20,
     images: ['https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -55,7 +63,9 @@ export const mockProducts = [
     rating: 4.9,
     category: 'c1',
     gender: 'Unisex',
-    images: ['https://images.unsplash.com/photo-1552346154-21d32810baa3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+    sizes: ['7', '8', '9', '10', '11'],
+    stock: 15,
+    images: ['https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
     _id: 'p6',
@@ -65,6 +75,8 @@ export const mockProducts = [
     rating: 4.7,
     category: 'c4',
     gender: 'Women',
+    sizes: ['M', 'L', 'XL'],
+    stock: 5,
     images: ['https://images.unsplash.com/photo-1610030469983-98e550d6193c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -75,6 +87,8 @@ export const mockProducts = [
     rating: 4.4,
     category: 'c5',
     gender: 'Men',
+    sizes: ['S', 'M', 'L'],
+    stock: 30,
     images: ['https://images.unsplash.com/photo-1512411030419-f027581a629b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -85,6 +99,56 @@ export const mockProducts = [
     rating: 4.8,
     category: 'c3',
     gender: 'Men',
+    sizes: ['M', 'L', 'XL'],
+    stock: 25,
     images: ['https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    _id: 'p9',
+    name: 'Classic Navy Blue Suit',
+    brand: 'Armani',
+    price: 15999,
+    rating: 4.9,
+    category: 'c3',
+    gender: 'Men',
+    sizes: ['38', '40', '42'],
+    stock: 4,
+    images: ['https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    _id: 'p10',
+    name: 'High-Waist Yoga Leggings',
+    brand: 'Lululemon',
+    price: 4500,
+    rating: 4.8,
+    category: 'c5',
+    gender: 'Women',
+    sizes: ['XS', 'S', 'M', 'L'],
+    stock: 50,
+    images: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    _id: 'p11',
+    name: 'Festive Jacquard Sherwani',
+    brand: 'Manyavar',
+    price: 12500,
+    rating: 4.7,
+    category: 'c4',
+    gender: 'Men',
+    sizes: ['M', 'L', 'XL'],
+    stock: 10,
+    images: ['https://images.unsplash.com/photo-1583391733958-d25e0b46e294?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    _id: 'p12',
+    name: 'High-Top Street Sneakers',
+    brand: 'Converse',
+    price: 3499,
+    rating: 4.6,
+    category: 'c1',
+    gender: 'Unisex',
+    sizes: ['6', '7', '8', '9', '10'],
+    stock: 22,
+    images: ['https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80']
   }
 ];
