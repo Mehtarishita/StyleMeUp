@@ -91,39 +91,56 @@ const Explore = () => {
       <section className="section" style={{ display: 'flex', gap: '30px', maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         
         {/* Sidebar Filters */}
-        <aside style={{ width: '250px', flexShrink: 0 }}>
-          <h3 style={{ marginBottom: '20px' }}>Filters</h3>
+        <aside style={{ 
+          width: '260px', 
+          flexShrink: 0, 
+          background: 'var(--white)', 
+          padding: '24px', 
+          borderRadius: '12px', 
+          border: '1px solid var(--border)', 
+          boxShadow: 'var(--shadow)', 
+          height: 'fit-content' 
+        }}>
+          <h3 style={{ marginBottom: '20px', paddingBottom: '10px', borderBottom: '1px solid var(--border)', color: 'var(--heading)' }}>Filters</h3>
           
-          <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ marginBottom: '10px', fontSize: '16px' }}>Category</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label>
-                <input type="radio" name="category" checked={category === ''} onChange={() => setCategory('')} /> All
+          <div style={{ marginBottom: '25px' }}>
+            <h4 style={{ marginBottom: '12px', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--muted)' }}>Category</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: category === '' ? 'var(--primary)' : 'inherit', fontWeight: category === '' ? '600' : 'normal' }}>
+                <input type="radio" name="category" checked={category === ''} onChange={() => setCategory('')} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> All
               </label>
               {categories.map(c => (
-                <label key={c._id}>
-                  <input type="radio" name="category" checked={category === c._id} onChange={() => setCategory(c._id)} /> {c.name}
+                <label key={c._id} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: category === c._id ? 'var(--primary)' : 'inherit', fontWeight: category === c._id ? '600' : 'normal' }}>
+                  <input type="radio" name="category" checked={category === c._id} onChange={() => setCategory(c._id)} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> {c.name}
                 </label>
               ))}
             </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ marginBottom: '10px', fontSize: '16px' }}>Gender</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label><input type="radio" name="gender" checked={gender === ''} onChange={() => setGender('')} /> All</label>
-              <label><input type="radio" name="gender" checked={gender === 'Men'} onChange={() => setGender('Men')} /> Men</label>
-              <label><input type="radio" name="gender" checked={gender === 'Women'} onChange={() => setGender('Women')} /> Women</label>
-              <label><input type="radio" name="gender" checked={gender === 'Unisex'} onChange={() => setGender('Unisex')} /> Unisex</label>
+          <div style={{ marginBottom: '25px' }}>
+            <h4 style={{ marginBottom: '12px', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--muted)' }}>Gender</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: gender === '' ? 'var(--primary)' : 'inherit', fontWeight: gender === '' ? '600' : 'normal' }}>
+                <input type="radio" name="gender" checked={gender === ''} onChange={() => setGender('')} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> All
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: gender === 'Men' ? 'var(--primary)' : 'inherit', fontWeight: gender === 'Men' ? '600' : 'normal' }}>
+                <input type="radio" name="gender" checked={gender === 'Men'} onChange={() => setGender('Men')} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> Men
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: gender === 'Women' ? 'var(--primary)' : 'inherit', fontWeight: gender === 'Women' ? '600' : 'normal' }}>
+                <input type="radio" name="gender" checked={gender === 'Women'} onChange={() => setGender('Women')} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> Women
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '15px', color: gender === 'Unisex' ? 'var(--primary)' : 'inherit', fontWeight: gender === 'Unisex' ? '600' : 'normal' }}>
+                <input type="radio" name="gender" checked={gender === 'Unisex'} onChange={() => setGender('Unisex')} style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', margin: 0 }} /> Unisex
+              </label>
             </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ marginBottom: '10px', fontSize: '16px' }}>Sort By</h4>
+          <div style={{ marginBottom: '10px' }}>
+            <h4 style={{ marginBottom: '12px', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--muted)' }}>Sort By</h4>
             <select 
               value={sort} 
               onChange={(e) => setSort(e.target.value)}
-              style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid var(--border)' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: '#fff', fontSize: '14px', cursor: 'pointer', outline: 'none' }}
             >
               <option value="newest">Newest Arrivals</option>
               <option value="price_asc">Price: Low to High</option>
