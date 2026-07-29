@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const StylistChat = () => {
   const [messages, setMessages] = useState([{ role: 'assistant', content: 'Hi! I am your AI Fashion Stylist. What can I help you find today?', recommendedProducts: [] }]);
@@ -52,7 +53,8 @@ const StylistChat = () => {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', background: '#fff', borderRadius: '16px', boxShadow: 'var(--shadow)', display: 'flex', flexDirection: 'column', height: '80vh', border: '1px solid var(--border)' }}>
+    <div style={{ maxWidth: '800px', margin: '40px auto', background: 'var(--white)', borderRadius: '16px', boxShadow: 'var(--shadow)', display: 'flex', flexDirection: 'column', height: '80vh', border: '1px solid var(--border)' }}>
+      <SEO title="Chat Stylist" description="Talk to our AI stylist to get personalized outfit recommendations." />
       {/* Header */}
       <div style={{ padding: '20px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--lavender-light)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
         <div>

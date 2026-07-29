@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Skeleton from '../components/Skeleton';
+import SEO from '../components/SEO';
 
 const Explore = () => {
   const [products, setProducts] = useState([]);
@@ -48,6 +50,7 @@ const Explore = () => {
 
   return (
     <>
+      <SEO title="Explore Collection" description="Discover curated outfits and trends on StyleMeUp." />
       {/* Explore Hero Section */}
       <section className="explore-hero section" style={{ padding: '60px 20px', background: 'var(--bg)' }}>
         <h1 className="section__title">EXPLORE THE COLLECTION <span className="txt-gradient"></span></h1>
@@ -113,7 +116,16 @@ const Explore = () => {
         {/* Product Grid */}
         <div style={{ flex: 1 }}>
           {loading ? (
-            <div className="center"><p>Loading products...</p></div>
+            <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '25px' }}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <Skeleton height="280px" />
+                  <Skeleton height="15px" width="40%" />
+                  <Skeleton height="20px" width="80%" />
+                  <Skeleton height="20px" width="30%" />
+                </div>
+              ))}
+            </div>
           ) : products.length === 0 ? (
             <div className="center"><p>No products found matching your criteria.</p></div>
           ) : (
@@ -124,6 +136,7 @@ const Explore = () => {
                     <img 
                       src={product.images[0] || 'https://via.placeholder.com/400x500'} 
                       alt={product.name} 
+                      loading="lazy"
                       style={{ width: '100%', height: '280px', objectFit: 'cover' }}
                     />
                   </Link>

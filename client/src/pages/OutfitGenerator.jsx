@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 
 const OutfitGenerator = () => {
@@ -50,8 +51,9 @@ const OutfitGenerator = () => {
 
   return (
     <>
-      <section className="section center" style={{ background: 'linear-gradient(135deg, #FFF5FA, #FDECF2)', padding: '60px 20px' }}>
-        <h1 className="section__title txt-gradient">AI Outfit Generator</h1>
+      <section className="section" style={{ padding: '40px 20px', maxWidth: '800px', margin: '0 auto' }}>
+        <SEO title="AI Outfit Generator" description="Generate personalized outfit recommendations." />
+        <h1 className="section__title center">Surprise Me <span className="txt-gradient">AI Generator</span></h1>
         <p className="section__subtitle" style={{ margin: '0 auto' }}>Tell us what you need, and our AI stylist will craft the perfect look for you from our catalog.</p>
       </section>
 

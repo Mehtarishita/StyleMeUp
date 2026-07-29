@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import Skeleton from '../components/Skeleton';
+import SEO from '../components/SEO';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -75,7 +77,22 @@ const ProductDetail = () => {
   };
 
   if (loading) {
-    return <section className="section center"><p>Loading product...</p></section>;
+    return (
+      <section className="section" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
+          <div style={{ flex: '1 1 400px' }}>
+            <Skeleton height="500px" borderRadius="12px" />
+          </div>
+          <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <Skeleton height="20px" width="100px" />
+            <Skeleton height="40px" width="80%" />
+            <Skeleton height="30px" width="120px" />
+            <Skeleton height="100px" width="100%" />
+            <Skeleton height="40px" width="50%" />
+          </div>
+        </div>
+      </section>
+    );
   }
 
   if (!product) {
@@ -84,6 +101,7 @@ const ProductDetail = () => {
 
   return (
     <section className="section" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+      <SEO title={product.name} description={product.description?.substring(0, 150)} image={product.images[0]} />
       <Link to="/explore.html" className="btn btn--outline btn--sm" style={{ marginBottom: '20px' }}>&larr; Back to Explore</Link>
       
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
@@ -91,7 +109,8 @@ const ProductDetail = () => {
         <div style={{ flex: '1 1 400px' }}>
           <img 
             src={product.images[0] || 'https://via.placeholder.com/400x500'} 
-            alt={product.name} 
+            alt={product.name}
+            loading="lazy"
             style={{ width: '100%', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
           />
         </div>

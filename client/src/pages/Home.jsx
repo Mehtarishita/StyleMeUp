@@ -1,10 +1,12 @@
 import React from 'react';
 import Carousel from '../components/Carousel';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Home = () => {
   return (
     <>
+      <SEO title="Home" description="Style Your Life with StyleMeUp - Your Personal Fashion Studio." />
       {/* ============ HERO ============ */}
       <header className="hero">
         <div className="hero__container">
@@ -60,42 +62,42 @@ const Home = () => {
 
         <div className="grid features-grid">
           <article className="card feature-card">
-            <img src="/assets/images/home/outfitgenerator.webp" className="card__img" alt="" />
+            <img src="/assets/images/home/outfitgenerator.webp" className="card__img" alt="AI Outfit Generator" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">AI Outfit Generator</h3>
               <p className="card__text">Get personalized outfit suggestions based on your style, weather, and occasion.</p>
             </div>
           </article>
           <article className="card feature-card">
-            <img src="/assets/images/home/tryon.jpg" className="card__img" alt="" />
+            <img src="/assets/images/home/tryon.jpg" className="card__img" alt="Virtual Try-On" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">Virtual Try-On</h3>
               <p className="card__text">Use AI filters to see how outfits look on you before buying.</p>
             </div>
           </article>
           <article className="card feature-card">
-            <img src="/assets/images/home/smartshopping.jpg" className="card__img" alt="" />
+            <img src="/assets/images/home/smartshopping.jpg" className="card__img" alt="Smart Shopping" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">Smart Shopping</h3>
               <p className="card__text">Shop directly from curated looks with affiliate rewards for creators.</p>
             </div>
           </article>
           <article className="card feature-card">
-            <img src="/assets/images/home/moodboard.webp" className="card__img" alt="" />
+            <img src="/assets/images/home/moodboard.webp" className="card__img" alt="Style Boards" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">Style Boards</h3>
               <p className="card__text">Create Pinterest-like mood boards and save your favorite looks.</p>
             </div>
           </article>
           <article className="card feature-card">
-            <img src="/assets/images/home/reel.png" className="card__img" alt="" />
+            <img src="/assets/images/home/reel.png" className="card__img" alt="Reel Studio" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">Reel Studio</h3>
               <p className="card__text">Create fashion reels with AI-powered editing and trending sounds.</p>
             </div>
           </article>
           <article className="card feature-card">
-            <img src="/assets/images/home/wardrobe-tracker.jpg" className="card__img" alt="" />
+            <img src="/assets/images/home/wardrobe-tracker.jpg" className="card__img" alt="Wardrobe Tracker" loading="lazy" />
             <div className="card__body">
               <h3 className="card__title">Wardrobe Tracker</h3>
               <p className="card__text">Organize your closet digitally and track outfit history.</p>
