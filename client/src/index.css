@@ -1,7 +1,9 @@
 @import './styles/style.css';
 @import './styles/components.css';
+@import './styles/reels.css';
+@import './styles/creators.css';
+@import './styles/about.css';
 @import './styles/responsive.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
