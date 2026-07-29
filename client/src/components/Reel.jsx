@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Share2, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { variants } from '../styles/motion';
 
 const getYouTubeId = (url) => {
   if (!url) return null;
@@ -96,27 +98,42 @@ export const ReelCard = ({ video, title, creator, duration, openModal }) => {
 };
 
 export const ReelModal = ({ embedUrl, title, creator, isOpen, closeModal }) => {
-  if (!isOpen) return null;
-
   return (
-    <div className={`reel-modal ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
-      <div className="reel-modal__backdrop" onClick={closeModal}></div>
-      <div className="reel-modal__content">
-        <button className="reel-modal__close" onClick={closeModal}>✕</button>
-        <div className="reel-modal__player">
-          <iframe 
-            src={embedUrl} 
-            title={title}
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen 
-          />
-        </div>
-        <div className="reel-modal__meta">
-          <h3>{title}</h3>
-          <p>{creator}</p>
-        </div>
-      </div>
-    </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          className="reel-modal open" 
+          aria-hidden={!isOpen}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="reel-modal__backdrop" onClick={closeModal}></div>
+          <motion.div 
+            className="reel-modal__content"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          >
+            <button className="reel-modal__close" onClick={closeModal}>✕</button>
+            <div className="reel-modal__player">
+              <iframe 
+                src={embedUrl} 
+                title={title}
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen 
+              />
+            </div>
+            <div className="reel-modal__meta">
+              <h3>{title}</h3>
+              <p>{creator}</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
