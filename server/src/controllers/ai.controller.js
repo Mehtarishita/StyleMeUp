@@ -52,6 +52,66 @@ export const getOutfitRecommendation = async (req, res, next) => {
   }
 };
 
+// @desc    Generate surprise outfit (Phase 5d)
+// @route   POST /api/ai/outfit-generator
+// @access  Public
+export const getOutfitSurprise = async (req, res, next) => {
+  try {
+    const { occasion, budget, gender } = req.body;
+
+    const occasions = ['Casual Outing', 'Formal Event', 'Office / Work', 'Date Night', 'Party / Clubbing'];
+    const budgets = ['Budget-Friendly', 'Mid-Range', 'Premium / Luxury', 'Flexible'];
+    const genders = ['Women', 'Men', 'Unisex'];
+    const seasons = ['Summer', 'Winter', 'Spring', 'Fall', 'All Season'];
+    const styles = ['Minimalist', 'Streetwear', 'Vintage / Retro', 'Bohemian', 'Preppy', 'Edgy'];
+    const colorsList = ['Black', 'White', 'Red', 'Blue', 'Green', 'Beige', 'Pink', 'Navy', 'Brown', 'Grey'];
+
+    const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const getRandomColors = () => [getRandom(colorsList), getRandom(colorsList)];
+
+    const selectedOccasion = occasion || getRandom(occasions);
+    const selectedBudget = budget || getRandom(budgets);
+    const selectedGender = gender || getRandom(genders);
+    const selectedSeason = getRandom(seasons);
+    const selectedStyle = getRandom(styles);
+    const selectedColors = getRandomColors();
+
+    const aiOutfit = await generateOutfitRecommendation({
+      occasion: selectedOccasion,
+      budget: selectedBudget,
+      gender: selectedGender,
+      colors: selectedColors,
+      season: selectedSeason,
+      style: selectedStyle
+    });
+
+    const matchedTop = await findMatch(aiOutfit.top, selectedGender);
+    const matchedBottom = await findMatch(aiOutfit.bottom, selectedGender);
+    const matchedShoes = await findMatch(aiOutfit.shoes, selectedGender);
+    const matchedAccessories = await findMatch(aiOutfit.accessories, selectedGender);
+
+    const matchedProducts = [matchedTop, matchedBottom, matchedShoes, matchedAccessories].filter(Boolean);
+
+    const recommendation = await Recommendation.create({
+      user: req.user ? req.user._id : null,
+      input: { occasion: selectedOccasion, budget: selectedBudget, gender: selectedGender, colors: selectedColors, season: selectedSeason, style: selectedStyle },
+      outfit: aiOutfit,
+      matchedProducts
+    });
+
+    const populatedRecommendation = await Recommendation.findById(recommendation._id).populate('matchedProducts');
+
+    res.status(200).json({
+      success: true,
+      data: populatedRecommendation,
+      message: 'Surprise Outfit generated successfully'
+    });
+  } catch (error) {
+    console.error('AI Controller Surprise Error:', error);
+    res.status(500).json({ success: false, data: null, message: error.message || 'Failed to generate surprise recommendation' });
+  }
+};
+
 // @desc    Chat with AI Stylist
 // @route   POST /api/ai/stylist-chat
 // @access  Public

@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
       setSuccessMsg('Check your email for the reset link! (Check server console for Ethereal URL if testing)');
       toast.success('Reset email sent');
     } catch (error) {

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(`${API_URL}/me`);
       setUser(res.data.data);
     } catch (error) {
+      console.error(error);
       setUser(null);
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
@@ -92,6 +94,7 @@ export const AuthProvider = ({ children }) => {
       setUser(prev => ({ ...prev, wishlist: res.data.data }));
       toast.success(res.data.message);
     } catch (error) {
+      console.error(error);
       toast.error('Failed to update wishlist');
     }
   };
@@ -103,6 +106,7 @@ export const AuthProvider = ({ children }) => {
       setUser(prev => ({ ...prev, cart: res.data.data }));
       toast.success('Cart updated');
     } catch (error) {
+      console.error(error);
       toast.error('Failed to add to cart');
     }
   };
@@ -112,6 +116,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.delete(`http://localhost:5000/api/users/cart/${itemId}`);
       setUser(prev => ({ ...prev, cart: res.data.data }));
     } catch (error) {
+      console.error(error);
       toast.error('Failed to remove from cart');
     }
   };

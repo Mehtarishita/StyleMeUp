@@ -37,6 +37,7 @@ const StylistChat = () => {
       setConversationId(updatedConversation._id);
       setMessages(updatedConversation.messages);
     } catch (error) {
+      console.error(error);
       toast.error('Failed to get a response from Stylist.');
       // Remove the optimistic user message if failed
       setMessages(prev => prev.slice(0, -1));

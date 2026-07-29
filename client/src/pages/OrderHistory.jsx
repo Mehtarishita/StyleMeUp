@@ -18,6 +18,7 @@ const OrderHistory = () => {
       const res = await axios.get('http://localhost:5000/api/orders');
       setOrders(res.data.data);
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load orders');
     } finally {
       setLoading(false);

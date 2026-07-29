@@ -10,6 +10,7 @@ const getYouTubeId = (url) => {
     const m = url.match(/(embed|shorts)\/([A-Za-z0-9_-]{6,})/);
     if (m && m[2]) return m[2];
   } catch (e) {
+    console.error(e);
     const m = url.match(/([A-Za-z0-9_-]{6,})$/);
     if (m) return m[1];
   }
@@ -46,6 +47,7 @@ export const ReelCard = ({ video, title, creator, duration, openModal }) => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch (e) {
+      console.error(e);
       alert('Copy failed — here is the link: ' + video);
     }
   };

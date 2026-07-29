@@ -26,6 +26,7 @@ const Checkout = () => {
         setSelectedAddress(res.data.data.find(a => a.isDefault) || res.data.data[0]);
       }
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load addresses');
     }
   };
@@ -38,6 +39,7 @@ const Checkout = () => {
       setShowForm(false);
       fetchAddresses();
     } catch (error) {
+      console.error(error);
       toast.error('Failed to add address');
     }
   };

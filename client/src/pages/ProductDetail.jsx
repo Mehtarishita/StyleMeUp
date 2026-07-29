@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -20,11 +20,7 @@ const ProductDetail = () => {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    fetchProductDetails();
-  }, [id]);
-
-  const fetchProductDetails = async () => {
+  const fetchProductDetails = useCallback(async () => {
     try {
       setLoading(true);
       const [productRes, reviewsRes] = await Promise.all([
@@ -42,11 +38,17 @@ const ProductDetail = () => {
       // Track recently viewed
       trackRecentlyViewed(id);
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load product details');
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, trackRecentlyViewed]);
+
+  useEffect(() => {
+    fetchProductDetails();
+  }, [fetchProductDetails]);
+
 
   const submitReview = async (e) => {
     e.preventDefault();

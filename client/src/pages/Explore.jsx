@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -17,20 +17,7 @@ const Explore = () => {
     fetchCategories();
   }, []);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [category, gender, sort, keyword]);
-
-  const fetchCategories = async () => {
-    try {
-      const res = await axios.get('http://localhost:5000/api/categories');
-      setCategories(res.data.data);
-    } catch (error) {
-      console.error('Failed to load categories', error);
-    }
-  };
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       let query = `?sort=${sort}`;
@@ -44,6 +31,18 @@ const Explore = () => {
       console.error('Failed to load products', error);
     } finally {
       setLoading(false);
+    }
+  }, [category, gender, sort, keyword]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/api/categories');
+      setCategories(res.data.data);
+    } catch (error) {
+      console.error('Failed to load categories', error);
     }
   };
 

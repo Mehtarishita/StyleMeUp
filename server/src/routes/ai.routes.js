@@ -1,5 +1,5 @@
 import express from 'express';
-import { getOutfitRecommendation, postChatMessage, processImageSearch } from '../controllers/ai.controller.js';
+import { getOutfitRecommendation, postChatMessage, processImageSearch, getOutfitSurprise } from '../controllers/ai.controller.js';
 import { protect } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
@@ -21,6 +21,7 @@ const optionalAuth = async (req, res, next) => {
 };
 
 router.post('/outfit-recommendation', optionalAuth, getOutfitRecommendation);
+router.post('/outfit-generator', optionalAuth, getOutfitSurprise);
 router.post('/stylist-chat', optionalAuth, postChatMessage);
 
 import multer from 'multer';

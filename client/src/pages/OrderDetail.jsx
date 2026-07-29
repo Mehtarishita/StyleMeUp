@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -8,20 +8,21 @@ const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchOrder();
-  }, [id]);
-
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const res = await axios.get(`http://localhost:5000/api/orders/${id}`);
       setOrder(res.data.data);
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load order details');
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchOrder();
+  }, [fetchOrder]);
 
   if (loading) return <section className="section center"><p>Loading...</p></section>;
   if (!order) return <section className="section center"><p>Order not found</p></section>;
