@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { variants } from './styles/motion';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -28,11 +30,18 @@ import AdminProducts from './pages/admin/AdminProducts';
 import AdminOrders from './pages/admin/AdminOrders';
 import AdminUsers from './pages/admin/AdminUsers';
 
-function App() {
+const AnimatedRoutes = () => {
+  const location = useLocation();
   return (
-    <Router>
-      <Layout>
-        <Routes>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        variants={variants.pageFade}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/explore.html" element={<Explore />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -70,8 +79,20 @@ function App() {
           
           <Route path="*" element={<Home />} />
         </Routes>
-      </Layout>
-    </Router>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <Layout>
+          <AnimatedRoutes />
+        </Layout>
+      </Router>
+    </MotionConfig>
   );
 }
 
