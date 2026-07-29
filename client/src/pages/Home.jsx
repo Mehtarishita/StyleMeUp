@@ -38,13 +38,7 @@ const Home = () => {
 
           <div className="hero__right">
             <div className="hero-card" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              {checkWebGLSupport() ? (
-                <Suspense fallback={<img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />}>
-                  <HeroScene />
-                </Suspense>
-              ) : (
-                <img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />
-              )}
+              <img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />
               <div className="chip chip--top-left" style={{ zIndex: 10 }}>
                 <img src="/assets/icons/eye.svg" alt="" /> 25.2k Views
               </div>
