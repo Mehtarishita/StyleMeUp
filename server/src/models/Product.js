@@ -54,6 +54,10 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     tags: [String],
+    imageAttributes: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,
@@ -76,9 +80,9 @@ productSchema.index({ category: 1, gender: 1, price: 1 });
 // We create a text index on name, description, and tags to enable native MongoDB
 // full-text search. This allows the user to type a query like "summer party dress"
 // into a search bar, and MongoDB will intelligently score and return relevant products
-// by searching across all three of these string fields efficiently, without needing
+// by searching across all these string fields efficiently, without needing
 // complex regex scans.
-productSchema.index({ name: 'text', description: 'text', tags: 'text' });
+productSchema.index({ name: 'text', description: 'text', tags: 'text', imageAttributes: 'text' });
 
 const Product = mongoose.model('Product', productSchema);
 export default Product;

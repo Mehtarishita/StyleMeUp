@@ -1,5 +1,5 @@
 import express from 'express';
-import { getOutfitRecommendation, postChatMessage } from '../controllers/ai.controller.js';
+import { getOutfitRecommendation, postChatMessage, processImageSearch } from '../controllers/ai.controller.js';
 import { protect } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
@@ -22,5 +22,13 @@ const optionalAuth = async (req, res, next) => {
 
 router.post('/outfit-recommendation', optionalAuth, getOutfitRecommendation);
 router.post('/stylist-chat', optionalAuth, postChatMessage);
+
+import multer from 'multer';
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
+
+router.post('/image-search', optionalAuth, upload.single('image'), processImageSearch);
 
 export default router;

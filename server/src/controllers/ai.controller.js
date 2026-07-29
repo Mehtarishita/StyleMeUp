@@ -1,6 +1,7 @@
-import { generateOutfitRecommendation, generateChatResponse } from '../services/ai.service.js';
+import { generateOutfitRecommendation, generateChatResponse, analyzeImage } from '../services/ai.service.js';
 import Recommendation from '../models/Recommendation.js';
 import Conversation from '../models/Conversation.js';
+import Product from '../models/Product.js';
 import { findMatch } from '../utils/matching.js';
 
 // @desc    Generate outfit recommendation using AI
@@ -112,5 +113,43 @@ export const postChatMessage = async (req, res, next) => {
   } catch (error) {
     console.error('AI Chat Error:', error);
     res.status(500).json({ success: false, data: null, message: error.message || 'Failed to communicate with Stylist' });
+  }
+};
+
+// @desc    Process uploaded image and return similar products
+// @route   POST /api/ai/image-search
+// @access  Public
+export const processImageSearch = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'Please upload an image file' });
+    }
+
+    // Convert buffer to base64
+    const base64Data = req.file.buffer.toString('base64');
+    const mimeType = req.file.mimetype;
+
+    // Get descriptive attributes from Gemini Vision
+    const imageAttributes = await analyzeImage(mimeType, base64Data);
+    console.log('Gemini Extracted Attributes:', imageAttributes);
+
+    // Search database for matching products using $text index which includes imageAttributes
+    const matchedProducts = await Product.find(
+      { $text: { $search: imageAttributes } },
+      { score: { $meta: 'textScore' } }
+    )
+    .sort({ score: { $meta: 'textScore' } })
+    .limit(4);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        extractedAttributes: imageAttributes,
+        products: matchedProducts
+      }
+    });
+  } catch (error) {
+    console.error('Image Search Error:', error);
+    res.status(500).json({ success: false, message: error.message || 'Failed to process image' });
   }
 };

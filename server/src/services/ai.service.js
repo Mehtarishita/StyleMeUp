@@ -88,3 +88,35 @@ Conversation History:
     throw new Error('Failed to communicate with AI Stylist.');
   }
 };
+
+export const analyzeImage = async (mimeType, base64Data) => {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY is not configured in environment variables');
+  }
+
+  const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+  
+  const prompt = `
+    You are an expert fashion stylist and visual search engine. 
+    Analyze this image and describe the primary garment or fashion accessory in a concise string of keywords. 
+    Include the garment type, color, pattern, material, style, and any defining features. 
+    Do NOT write full sentences. Return ONLY the raw keyword string.
+    Example output: "red floral midi dress summer short sleeves casual"
+  `;
+
+  try {
+    const result = await model.generateContent([
+      prompt,
+      {
+        inlineData: {
+          mimeType,
+          data: base64Data
+        }
+      }
+    ]);
+    return result.response.text().trim();
+  } catch (error) {
+    console.error('AI Image Analysis Error:', error);
+    throw new Error('Failed to analyze image.');
+  }
+};

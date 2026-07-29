@@ -1,22 +1,42 @@
 # StyleMeUp - Your Personal Fashion Studio
 
-StyleMeUp is a personal fashion studio designed to help users discover personalized outfits, try looks virtually, shop seamlessly, and earn from their style influence.
+StyleMeUp is a full-stack personal fashion studio designed to help users discover personalized outfits, try looks virtually, shop seamlessly, and earn from their style influence.
 
-## Current Tech Stack
-
-Currently, the project is a static frontend-only application with no build tools or backend logic:
-- HTML5
-- Vanilla CSS
-- Vanilla JavaScript
+## Tech Stack
+- **Frontend**: React (Vite), Vanilla CSS, React Router DOM
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (via Mongoose), currently using `mongodb-memory-server` for local development.
+- **AI Integration**: Google Generative AI (`gemini-flash-latest`) for Outfit Recommendations, Stylist Chat, and Visual Search.
 
 ## How to Run Locally
 
-Since this is a static site with no build process, running it is simple:
-1. Clone this repository to your local machine.
-2. Open `index.html` in your web browser. 
-   *(Note: For the component injection like navbar/footer to work correctly without CORS errors, it is recommended to serve the files using a local development server, such as the VS Code Live Server extension or by running a local web server like `npx serve` or `python -m http.server` in the project root).*
+1. Clone this repository.
+2. Open two terminal windows.
+
+**Start the Backend:**
+```bash
+cd server
+npm install
+npm start
+```
+
+**Start the Frontend:**
+```bash
+cd client
+npm install
+npm run dev
+```
+
+## AI Visual Search Architecture (Demo vs Production)
+
+> **Important Note on Visual Search Implementation**
+>
+> The Visual Search feature (Virtual Try-On) currently uses a **Gemini Vision Attribute Extraction** approach for demo purposes. When a user uploads a photo, the image is passed to `gemini-flash-latest`, which analyzes the garment and extracts a rich string of stylistic keywords (e.g., "red floral midi dress short sleeves"). We then query our MongoDB database using a native `$text` search against these keywords.
+> 
+> **To make this production-grade:** 
+> In a real production application with millions of products, this should be replaced with a **Vector Database** (such as MongoDB Atlas Vector Search, Pinecone, or Milvus). The image would be processed by an Embedding Model (like CLIP) to generate a high-dimensional dense vector, which is then used to perform a fast k-Nearest Neighbors (kNN) cosine similarity search against pre-computed image embeddings in the catalog. 
 
 ## Roadmap
 
-- **Phase 1 (Current):** Static frontend UI and design system implementation.
-- **Phase 2 (In Progress):** A full-stack and AI rebuild is currently in progress. This will include real authentication, dynamic content generation, and backend integration for features like AI Outfit Generator and Virtual Try-On.
+- **Phase 1-6:** Full-stack conversion, Authentication, E-commerce Core, and AI Features (Outfit Generator, Stylist Chat, Visual Search) are **Complete**.
+- **Next Steps:** Deployment to production!

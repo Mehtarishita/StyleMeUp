@@ -90,7 +90,16 @@ export const seedDatabase = async () => {
         ]
       };
 
+      const categoryAttributes = {
+        'Tops': 'casual top shirt blouse t-shirt short sleeves comfortable soft cotton basic',
+        'Bottoms': 'jeans trousers pants denim casual wear bottoms pockets comfortable',
+        'Dresses': 'dress elegant floral midi maxi summer evening one-piece women',
+        'Outerwear': 'jacket coat hoodie winter warm outerwear layers zipper',
+        'Accessories': 'accessories bag belt sunglasses jewelry casual styling'
+      };
+
       const selectedImages = categoryImages[cat.name] || categoryImages['Tops'];
+      const attributes = categoryAttributes[cat.name] || 'clothing fashion wearable';
       
       productsToInsert.push({
         name: `${getRandom(['Classic', 'Oversized', 'Slim Fit', 'Vintage', 'Premium', 'Basic'])} ${cat.name} - ${i}`,
@@ -105,6 +114,7 @@ export const seedDatabase = async () => {
         occasion: [getRandom(occasions)],
         season: [getRandom(seasons)],
         images: [getRandom(selectedImages)],
+        imageAttributes: `${gender} ${cat.name} ${attributes} ${getRandom(colors)}`,
         stock: Math.floor(Math.random() * 100),
         rating: (Math.random() * 2 + 3).toFixed(1), // 3.0 to 5.0
         numReviews: Math.floor(Math.random() * 50),
