@@ -2,6 +2,7 @@ import { generateOutfitRecommendation, generateChatResponse, analyzeImage } from
 import Recommendation from '../models/Recommendation.js';
 import Conversation from '../models/Conversation.js';
 import Product from '../models/Product.js';
+import AILog from '../models/AILog.js';
 import { findMatch } from '../utils/matching.js';
 
 // @desc    Generate outfit recommendation using AI
@@ -39,6 +40,8 @@ export const getOutfitRecommendation = async (req, res, next) => {
     });
 
     const populatedRecommendation = await Recommendation.findById(recommendation._id).populate('matchedProducts');
+
+    await AILog.create({ feature: 'outfit-recommendation', user: req.user ? req.user._id : null });
 
     res.status(200).json({
       success: true,
@@ -100,6 +103,8 @@ export const getOutfitSurprise = async (req, res, next) => {
     });
 
     const populatedRecommendation = await Recommendation.findById(recommendation._id).populate('matchedProducts');
+
+    await AILog.create({ feature: 'outfit-generator', user: req.user ? req.user._id : null });
 
     res.status(200).json({
       success: true,
@@ -165,6 +170,8 @@ export const postChatMessage = async (req, res, next) => {
     // Return the updated conversation populated with products
     const populatedConversation = await Conversation.findById(conversation._id).populate('messages.recommendedProducts');
 
+    await AILog.create({ feature: 'stylist-chat', user: req.user ? req.user._id : null });
+
     res.status(200).json({
       success: true,
       data: populatedConversation,
@@ -200,6 +207,8 @@ export const processImageSearch = async (req, res, next) => {
     )
     .sort({ score: { $meta: 'textScore' } })
     .limit(4);
+
+    await AILog.create({ feature: 'image-search', user: req.user ? req.user._id : null });
 
     res.status(200).json({
       success: true,

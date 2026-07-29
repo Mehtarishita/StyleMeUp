@@ -15,6 +15,7 @@ import userRoutes from './routes/user.routes.js';
 import addressRoutes from './routes/address.routes.js';
 import orderRoutes from './routes/order.routes.js';
 import aiRoutes from './routes/ai.routes.js';
+import adminRoutes from './routes/admin.routes.js';
 
 // Load env vars
 dotenv.config();
@@ -51,6 +52,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
 app.use(notFound);

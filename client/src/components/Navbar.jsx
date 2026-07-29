@@ -64,6 +64,11 @@ const Navbar = () => {
                   </div>
                   <span>Profile</span>
                 </Link>
+                {user.role === 'admin' && (
+                  <Link to="/admin" className="link" style={{ marginLeft: '10px', color: 'var(--primary)', fontWeight: 'bold' }}>
+                    Admin Panel
+                  </Link>
+                )}
               </div>
               <button onClick={handleLogout} className="btn btn--sm btn--outline" style={{ cursor: 'pointer' }}>Logout</button>
             </>
