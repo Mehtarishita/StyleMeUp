@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Carousel from '../components/Carousel';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { checkWebGLSupport } from '../utils/webgl';
+
+const HeroScene = lazy(() => import('../components/3d/HeroScene'));
 
 const Home = () => {
   return (
@@ -34,15 +37,21 @@ const Home = () => {
           </div>
 
           <div className="hero__right">
-            <div className="hero-card">
-              <img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />
-              <div className="chip chip--top-left">
+            <div className="hero-card" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {checkWebGLSupport() ? (
+                <Suspense fallback={<img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />}>
+                  <HeroScene />
+                </Suspense>
+              ) : (
+                <img src="/assets/images/home/hero.png" alt="Hero look" className="hero-card__img" />
+              )}
+              <div className="chip chip--top-left" style={{ zIndex: 10 }}>
                 <img src="/assets/icons/eye.svg" alt="" /> 25.2k Views
               </div>
-              <div className="chip chip--bottom-left">
+              <div className="chip chip--bottom-left" style={{ zIndex: 10 }}>
                 <img src="/assets/icons/heart.svg" alt="" /> 856 Likes
               </div>
-              <div className="chip chip--top-right">
+              <div className="chip chip--top-right" style={{ zIndex: 10 }}>
                 <img src="/assets/icons/star.svg" alt="" /> 98% Match
               </div>
             </div>
