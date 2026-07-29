@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { variants } from '../styles/motion';
 import Skeleton from '../components/Skeleton';
 import SEO from '../components/SEO';
 
@@ -131,7 +133,14 @@ const Explore = () => {
           ) : (
             <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '25px' }}>
               {products.map(product => (
-                <div key={product._id} className="product-card" style={{ border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', transition: 'transform 0.3s ease' }}>
+                <motion.div 
+                  key={product._id} 
+                  className="product-card" 
+                  style={{ border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden' }}
+                  variants={variants.hoverCard}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
                   <Link to={`/product/${product._id}`}>
                     <img 
                       src={product.images[0] || 'https://via.placeholder.com/400x500'} 
@@ -150,7 +159,7 @@ const Explore = () => {
                       <span style={{ color: '#f39c12', fontSize: '12px' }}>★ {product.rating}</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}

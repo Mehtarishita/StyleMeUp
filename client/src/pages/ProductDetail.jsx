@@ -5,6 +5,8 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 import Skeleton from '../components/Skeleton';
 import SEO from '../components/SEO';
+import { motion } from 'framer-motion';
+import { variants } from '../styles/motion';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -164,12 +166,25 @@ const ProductDetail = () => {
           </div>
 
           <div style={{ display: 'flex', gap: '15px' }}>
-            <button onClick={() => addToCart(product._id, qty, selectedSize)} className="btn btn--primary wide" disabled={product.stock === 0} style={{ flex: 1 }}>
+            <motion.button 
+              onClick={() => addToCart(product._id, qty, selectedSize)} 
+              className="btn btn--primary wide" 
+              disabled={product.stock === 0} 
+              style={{ flex: 1 }}
+              variants={variants.tapButton}
+              whileTap="tap"
+            >
               {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-            </button>
-            <button onClick={() => toggleWishlist(product._id)} className="btn btn--outline" style={{ padding: '0 20px' }}>
+            </motion.button>
+            <motion.button 
+              onClick={() => toggleWishlist(product._id)} 
+              className="btn btn--outline" 
+              style={{ padding: '0 20px' }}
+              variants={variants.tapButton}
+              whileTap="tap"
+            >
               {user?.wishlist?.some(w => w._id === product._id || w === product._id) ? '♥ Saved' : '♡ Save'}
-            </button>
+            </motion.button>
           </div>
           <p style={{ marginTop: '10px', color: product.stock > 0 ? 'green' : 'red' }}>
             {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
