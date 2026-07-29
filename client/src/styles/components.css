@@ -35,17 +35,11 @@
 :root {
   --lavender: #9b59b6;
   --lavender-light: #f3e9fb;
-  --white: #ffffff;
-  --text: #333333;
-  --border: #ddd;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--lavender-light);
-  color: var(--text);
+[data-theme='dark'] {
+  --lavender: #b388ff;
+  --lavender-light: #2c1d38;
 }
 
 /* Navbar */
@@ -54,7 +48,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  color: var(--white);
 }
 
 .logo {
@@ -71,7 +64,7 @@ body {
 }
 
 .nav-links a {
-  color: var(--white);
+  color: var(--text);
   text-decoration: none;
   font-weight: 500;
 }
@@ -102,7 +95,7 @@ body {
   border: 2px dashed var(--lavender);
   border-radius: 16px;
   text-align: center;
-  background: var(--white);
+  background: var(--bg-soft);
 }
 
 .upload-section input {
@@ -131,7 +124,7 @@ body {
   border: 2px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  background: #f8f8f8;
+  background: var(--bg-soft);
 }
 
 .tryon-preview img#userPreview {
