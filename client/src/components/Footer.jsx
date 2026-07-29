@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Instagram, Youtube, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -8,10 +9,10 @@ const Footer = () => {
         <div>
           <h4>StyleMeUp</h4>
           <p>AI-powered fashion that helps you discover, try, and own your personal style.</p>
-          <div className="socials">
-            <a href="#"><img src="/assets/icons/instagram.svg" alt="Instagram" /></a>
-            <a href="#"><img src="/assets/icons/youtube.svg" alt="YouTube" /></a>
-            <a href="#"><img src="/assets/icons/twitter.svg" alt="Twitter" /></a>
+          <div className="socials" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+            <a href="#" aria-label="Instagram"><Instagram size={24} color="#fff" /></a>
+            <a href="#" aria-label="YouTube"><Youtube size={24} color="#fff" /></a>
+            <a href="#" aria-label="LinkedIn"><Linkedin size={24} color="#fff" /></a>
           </div>
         </div>
 
