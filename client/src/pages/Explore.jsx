@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { variants } from '../styles/motion';
 import Skeleton from '../components/Skeleton';
 import SEO from '../components/SEO';
+import { mockProducts, mockCategories } from '../data/mockData';
 
 const Explore = () => {
   const [products, setProducts] = useState([]);
@@ -32,7 +33,22 @@ const Explore = () => {
       const res = await axios.get(`http://localhost:5000/api/products${query}`);
       setProducts(res.data.data);
     } catch (error) {
-      console.error('Failed to load products', error);
+      console.warn('API failed, falling back to mock products.');
+      
+      // Filter mock data locally
+      let filtered = [...mockProducts];
+      if (keyword) {
+        const lowerKeyword = keyword.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(lowerKeyword) || p.brand.toLowerCase().includes(lowerKeyword));
+      }
+      if (category) filtered = filtered.filter(p => p.category === category);
+      if (gender) filtered = filtered.filter(p => p.gender === gender);
+      
+      if (sort === 'price_asc') filtered.sort((a, b) => a.price - b.price);
+      if (sort === 'price_desc') filtered.sort((a, b) => b.price - a.price);
+      if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+      setProducts(filtered);
     } finally {
       setLoading(false);
     }
@@ -41,12 +57,14 @@ const Explore = () => {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+
   const fetchCategories = async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/categories');
       setCategories(res.data.data);
     } catch (error) {
-      console.error('Failed to load categories', error);
+      console.warn('API failed, falling back to mock categories.');
+      setCategories(mockCategories);
     }
   };
 
